@@ -34,7 +34,7 @@ func deleteMovie(w http.ResponseWriter, r *http.Request){
 	params := mux.Vars(r)
 	for index, item := range movies {
 
-		if item.ID == Params["id"]{
+		if item.ID == params["id"]{
 			movies = append(movies[:index], movies[index+1:]...)
 			break
 		}
@@ -58,6 +58,7 @@ func createMovie(w http.ResponseWriter, r *http.Request){
 	var movies Movie
 	_ = json.NewDecoder(r.Body).Decode(&movie)
 	movie.ID = strconv.Itoa(rand.Intn(100000000))
+	movie := 
 	movies = append(movies, movie)
 	json.NewEncoder(w).Encode(movie)
 }
@@ -94,5 +95,5 @@ func main(){
 	r.HandleFunc("/movies/{id}", deleteMovie).Methods("DELETE")
 
 	fmt.Printf("Starting server at port 8000\n")
-	log.fatal(http.ListenAndServe(":	8000",r))
+	log.Fatal(http.ListenAndServe(":	8000",r))
 }
